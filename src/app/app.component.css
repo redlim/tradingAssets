@@ -1,0 +1,12 @@
+.isSelected{
+  text-decoration:line-through
+}
+
+.loadingGif{
+  width: 100px;
+  height: 100px;
+}
+.main-content{
+  float:left;
+}
+
