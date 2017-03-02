@@ -2,6 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import {HighchartsStatic} from 'angular2-highcharts/dist/HighchartsService';
+import { ChartModule } from 'angular2-highcharts';
+
 import { AppComponent } from './app.component';
 import { ItemComponent } from './item.component';
 import {AssetsService} from "./assets/services/assets.service";
@@ -12,6 +15,9 @@ import {AssetDetailComponent} from './assets/assets.detail.component'
 import {routing} from "./app.routing";
 import { MaterialModule } from '@angular/material';
 
+export function highchartsFactory() {
+  return require('highcharts');
+}
 
 @NgModule({
   declarations: [
@@ -27,9 +33,13 @@ import { MaterialModule } from '@angular/material';
     FormsModule,
     HttpModule,
     routing,
-    MaterialModule.forRoot()
+    MaterialModule.forRoot(),
+    ChartModule
   ],
-  providers: [AssetsService],
+  providers: [{
+    provide: HighchartsStatic,
+    useFactory: highchartsFactory
+  },AssetsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
