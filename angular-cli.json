@@ -20,7 +20,7 @@
       "styles": [
         "styles.css","theme.scss"
       ],
-      "scripts": [],
+      "scripts": ["../node_modules/chart.js/dist/Chart.bundle.js"],
       "environments": {
         "source": "environments/environment.ts",
         "dev": "environments/environment.ts",

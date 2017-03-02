@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { ChartsModule } from 'ng2-charts';
+
 import { AppComponent } from './app.component';
 import { ItemComponent } from './item.component';
 import {AssetsService} from "./assets/services/assets.service";
@@ -27,7 +29,8 @@ import { MaterialModule } from '@angular/material';
     FormsModule,
     HttpModule,
     routing,
-    MaterialModule.forRoot()
+    MaterialModule.forRoot(),
+    ChartsModule
   ],
   providers: [AssetsService],
   bootstrap: [AppComponent]
