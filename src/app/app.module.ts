@@ -10,7 +10,6 @@ import { ItemComponent } from './item.component';
 import {AssetsService} from "./assets/services/assets.service";
 import {HeaderComponent} from './header/header.component'
 import {AssetsComponent} from './assets/assets.component'
-import {AssetsEditComponent} from './assets/assets.edit.component'
 import {AssetDetailComponent} from './assets/assets.detail.component'
 import {DataTable} from './components/table/datatable.component'
 import {ColumnComponent} from './components/table/column.component'
@@ -30,7 +29,6 @@ export function highchartsFactory() {
     ItemComponent,
     AssetDetailComponent,
     AssetsComponent,
-    AssetsEditComponent,
     HeaderComponent,
     DataTable,
     ColumnComponent,

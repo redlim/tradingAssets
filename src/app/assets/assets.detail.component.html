@@ -6,9 +6,9 @@
           <box-component [icon]="'info'" [value]=asset?.name [color]="'blue'" [size]="'3'"></box-component>
           <box-component [icon]="'info'" [value]=asset?.isin [color]="'red'" [size]="'3'"></box-component>
           <box-component [icon]="'info'" [value]=asset?.symbol_type [color]="'yellow'" [size]="'3'"></box-component>
-          <box-component [icon]="'info'" [value]=asset?.region.name [color]="'red'" [size]="'3'"></box-component>
-          <box-component [icon]="'info'" [value]=asset?.sector.name [color]="'red'" [size]="'3'"></box-component>
-          <box-component [icon]="'info'" [value]=asset?.risk_family.name [color]="'red'" [size]="'3'"></box-component>
+          <box-component [icon]="'info'" [value]=formatData(asset?.region)  [color]="'red'" [size]="'3'"></box-component>
+          <box-component [icon]="'info'" [value]=formatData(asset?.sector) [color]="'red'" [size]="'3'"></box-component>
+          <box-component [icon]="'info'" [value]=formatRiskData(asset?.risk_family) [color]="'red'" [size]="'3'"></box-component>
           <box-component [icon]="'info'" [value]=asset?.issuer.name [color]="'red'" [size]="'3'"></box-component>
         </div>
         <div class="col-md-6">

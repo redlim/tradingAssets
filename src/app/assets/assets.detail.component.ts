@@ -17,7 +17,7 @@ export interface Asset {
 export class AssetDetailComponent {
 
   asset:Asset;
-
+  options:Object;
   constructor(private router: Router, activatedRoute: ActivatedRoute, private assetsService: AssetsService) {
 
     let id = activatedRoute.snapshot.params['id'];
@@ -25,13 +25,34 @@ export class AssetDetailComponent {
         (asset)=>{
           this.asset = asset;
           this.generateChart(asset.prices,asset.name,asset.currency.name);
-          this.formatData(asset);
         });
   }
-  options:Object;
-  formatData(data){
-
+  formatRiskData(data){
+    if(data){
+      let i = 1;
+      let level ="sub_family";
+      let name = data.name;
+      while(data[level]){
+        name+= '/ '+data[level].name;
+        data = data[level];
+      }
+      return name;
+    }
   }
+  formatData(data){
+    if(data){
+      let i = 2;
+      let level = Object.keys(data).indexOf('region_level'+i)> -1 ? 'region_level' : 'sector_level';
+      let name = data.name;
+      while(data[level+i]){
+        name+= '/ '+data[level+i].name;
+        data = data[level+i];
+        i++
+      }
+      return name;
+    }
+  }
+
   generateChart(data,title,subtitle){
     let result = data.reduce(function (acum,d) {
       acum.push([new Date(d.date),d.value]);
