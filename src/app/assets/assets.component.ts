@@ -47,20 +47,12 @@ export class AssetsComponent {
   }
   filterCurrency(){
     this.filteredList = this.assets.filter(function(el){
-      var result="";
-      for(var key in el){
-        result+= el[key];
-      }
-      return result.toLowerCase().indexOf(this.currency.toLowerCase()) > -1;
+      return el.currency.toLowerCase().indexOf(this.currency.toLowerCase()) > -1;
     }.bind(this));
   }
   filterRisk(){
     this.filteredList = this.assets.filter(function(el){
-      var result="";
-      for(var key in el){
-        result+= el[key];
-      }
-      return result.toLowerCase().indexOf(this.risk.toLowerCase()) > -1;
+      return el.risk_family.toLowerCase().indexOf(this.risk.toLowerCase()) > -1;
     }.bind(this));
   }
 

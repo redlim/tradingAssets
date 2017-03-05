@@ -12,7 +12,7 @@
           <th>Name</th>
           <th>Currency</th>
           <th>Risk Family</th>
-          <th>Actions</th>
+          <th>Info</th>
         </tr>
         </thead>
         <tbody>
@@ -28,7 +28,7 @@
           <td>{{asset.name}}</td>
           <td>{{asset.currency}}</td>
           <td>{{asset.risk_family}}</td>
-          <button (click)="detailsAsset(asset)" color="primary"><md-icon>info_outline</md-icon></button>
+          <button (click)="detailsAsset(asset)" class="btn btn-block btn-info"><md-icon>info_outline</md-icon></button>
         </tr>
         </tbody>
       </table>
