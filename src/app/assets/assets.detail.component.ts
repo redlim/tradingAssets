@@ -5,7 +5,8 @@ import {AssetsService} from './services/assets.service'
 export interface Asset {
   id?:number,
   name:string,
-  isin:string
+  isin:string,
+  value:string
 }
 
 @Component({
@@ -16,19 +17,43 @@ export interface Asset {
 export class AssetDetailComponent {
 
   asset:Asset;
-
+  options:Object;
   constructor(private router: Router, activatedRoute: ActivatedRoute, private assetsService: AssetsService) {
 
     let id = activatedRoute.snapshot.params['id'];
     assetsService.getAsset(id).subscribe(
         (asset)=>{
           this.asset = asset;
-          this.generateChart(asset.prices);
+          this.generateChart(asset.prices,asset.name,asset.currency.name);
         });
   }
-  options:Object;
+  formatRiskData(data){
+    if(data){
+      let i = 1;
+      let level ="sub_family";
+      let name = data.name;
+      while(data[level]){
+        name+= '/ '+data[level].name;
+        data = data[level];
+      }
+      return name;
+    }
+  }
+  formatData(data){
+    if(data){
+      let i = 2;
+      let level = Object.keys(data).indexOf('region_level'+i)> -1 ? 'region_level' : 'sector_level';
+      let name = data.name;
+      while(data[level+i]){
+        name+= '/ '+data[level+i].name;
+        data = data[level+i];
+        i++
+      }
+      return name;
+    }
+  }
 
-  generateChart(data){
+  generateChart(data,title,subtitle){
     let result = data.reduce(function (acum,d) {
       acum.push([new Date(d.date),d.value]);
       return acum;
@@ -39,10 +64,10 @@ export class AssetDetailComponent {
         type: 'spline'
       },
       title: {
-        text: 'Snow depth at Vikjafjellet, Norway'
+        text: title
       },
       subtitle: {
-        text: 'Irregular time data in Highcharts JS'
+        text: subtitle
       },
       xAxis: {
         type: 'datetime',
@@ -56,7 +81,7 @@ export class AssetDetailComponent {
       },
       yAxis: {
         title: {
-          text: 'Snow depth (m)'
+          text: 'prices ('+ subtitle+')'
         },
         min: 0
       },
@@ -74,7 +99,7 @@ export class AssetDetailComponent {
       },
 
       series: [{
-        name: 'Winter 2014-2015',
+        name: 'Prices',
         data: result
       }]
     };
