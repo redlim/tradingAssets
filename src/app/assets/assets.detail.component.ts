@@ -18,6 +18,7 @@ export class AssetDetailComponent {
 
   asset:Asset;
   options:Object;
+  comments:Object;
   constructor(private router: Router, activatedRoute: ActivatedRoute, private assetsService: AssetsService) {
 
     let id = activatedRoute.snapshot.params['id'];
@@ -25,7 +26,18 @@ export class AssetDetailComponent {
         (asset)=>{
           this.asset = asset;
           this.generateChart(asset.prices,asset.name,asset.currency.name);
+          this.loadComments(asset.id);
         });
+
+  }
+  loadComments(id){
+    this.comments = JSON.parse(localStorage.getItem("assetComments"+id));
+  }
+  addComment(comment,id){
+    let comments = JSON.parse(localStorage.getItem("assetComments"+id)) || [];
+    comments.push({content:comment,date:new Date()});
+    localStorage.setItem("assetComments"+id,JSON.stringify(comments));
+    this.comments = comments;
   }
   formatRiskData(data){
     if(data){
