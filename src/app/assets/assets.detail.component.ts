@@ -5,7 +5,8 @@ import {AssetsService} from './services/assets.service'
 export interface Asset {
   id?:number,
   name:string,
-  isin:string
+  isin:string,
+  value:string
 }
 
 @Component({
@@ -23,12 +24,15 @@ export class AssetDetailComponent {
     assetsService.getAsset(id).subscribe(
         (asset)=>{
           this.asset = asset;
-          this.generateChart(asset.prices);
+          this.generateChart(asset.prices,asset.name,asset.currency.name);
+          this.formatData(asset);
         });
   }
   options:Object;
+  formatData(data){
 
-  generateChart(data){
+  }
+  generateChart(data,title,subtitle){
     let result = data.reduce(function (acum,d) {
       acum.push([new Date(d.date),d.value]);
       return acum;
@@ -39,10 +43,10 @@ export class AssetDetailComponent {
         type: 'spline'
       },
       title: {
-        text: 'Snow depth at Vikjafjellet, Norway'
+        text: title
       },
       subtitle: {
-        text: 'Irregular time data in Highcharts JS'
+        text: subtitle
       },
       xAxis: {
         type: 'datetime',
@@ -56,7 +60,7 @@ export class AssetDetailComponent {
       },
       yAxis: {
         title: {
-          text: 'Snow depth (m)'
+          text: 'prices ('+ subtitle+')'
         },
         min: 0
       },
@@ -74,7 +78,7 @@ export class AssetDetailComponent {
       },
 
       series: [{
-        name: 'Winter 2014-2015',
+        name: 'Prices',
         data: result
       }]
     };
