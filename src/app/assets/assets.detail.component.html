@@ -1,25 +1,20 @@
 <div class="app-content">
   <md-card class="example-card">
     <md-card-content>
-      <chart [options]="options"></chart>
-      <box-component [icon]="'info'" [value]=asset?.name [color]="'red'" [size]="'3'"></box-component>
-      <table class="table">
-        <thead>
-        <tr>
-          <th>Name</th>
-          <th>Currency</th>
-          <th>Risk Family</th>
-          <th>Info</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>{{asset?.name}}</td>
-          <td>{{asset?.currency.name}}</td>
-          <td>{{asset?.isin}}</td>
-        </tr>
-        </tbody>
-      </table>
+      <div class="row">
+        <div class="col-md-6">
+          <box-component [icon]="'info'" [value]=asset?.name [color]="'blue'" [size]="'3'"></box-component>
+          <box-component [icon]="'info'" [value]=asset?.isin [color]="'red'" [size]="'3'"></box-component>
+          <box-component [icon]="'info'" [value]=asset?.symbol_type [color]="'yellow'" [size]="'3'"></box-component>
+          <box-component [icon]="'info'" [value]=asset?.region.name [color]="'red'" [size]="'3'"></box-component>
+          <box-component [icon]="'info'" [value]=asset?.sector.name [color]="'red'" [size]="'3'"></box-component>
+          <box-component [icon]="'info'" [value]=asset?.risk_family.name [color]="'red'" [size]="'3'"></box-component>
+          <box-component [icon]="'info'" [value]=asset?.issuer.name [color]="'red'" [size]="'3'"></box-component>
+        </div>
+        <div class="col-md-6">
+          <chart [options]="options"></chart>
+        </div>
+      </div>
     </md-card-content>
     <md-card-actions>
       <button (click)="editAsset(asset.id)" color="primary" md-fab><md-icon>edit</md-icon></button>
