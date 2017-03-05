@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router'
 import {AssetsService} from './services/assets.service'
-
+import {AngularFire, FirebaseListObservable,FirebaseObjectObservable} from 'angularfire2';
 export interface Asset {
   id?:number,
   name:string,
@@ -18,14 +18,37 @@ export class AssetDetailComponent {
 
   asset:Asset;
   options:Object;
-  constructor(private router: Router, activatedRoute: ActivatedRoute, private assetsService: AssetsService) {
+  comments:Object;
+  fireComments: FirebaseListObservable<any[]>;
+  comment:String;
+  constructor(private router: Router, activatedRoute: ActivatedRoute, private assetsService: AssetsService, private af: AngularFire) {
+
 
     let id = activatedRoute.snapshot.params['id'];
     assetsService.getAsset(id).subscribe(
         (asset)=>{
           this.asset = asset;
           this.generateChart(asset.prices,asset.name,asset.currency.name);
+          this.loadComments(asset.id);
+          this.fireComments = af.database.list("comments"+id);
+          console.log(this.fireComments)
         });
+
+  }
+  loadComments(id){
+    this.comments = JSON.parse(localStorage.getItem("assetComments"+id));
+  }
+  addComment(comment,id){
+
+    const itemObservable = this.af.database.list('comments'+id);
+    let date = new Date();
+    itemObservable.push({content:comment,date:date.toISOString()});
+
+    let comments = JSON.parse(localStorage.getItem("assetComments"+id)) || [];
+    comments.push({content:comment,date:new Date()});
+    localStorage.setItem("assetComments"+id,JSON.stringify(comments));
+    this.comments = comments;
+    this.comment = "";
   }
   formatRiskData(data){
     if(data){

@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {HighchartsStatic} from 'angular2-highcharts/dist/HighchartsService';
 import {ChartModule } from 'angular2-highcharts';
+import { AngularFireModule } from 'angularfire2';
+
 
 import { AppComponent } from './app.component';
 import { ItemComponent } from './item.component';
@@ -22,6 +24,14 @@ import { MaterialModule } from '@angular/material';
 export function highchartsFactory() {
   return require('highcharts');
 }
+export const   firebaseConfig = {
+  apiKey: "AIzaSyBlmeQ4vEuNm6OGApweq3WdC2FFjtGi4Vo",
+  authDomain: "etsassets.firebaseapp.com",
+  databaseURL: "https://etsassets.firebaseio.com",
+  storageBucket: "etsassets.appspot.com",
+  messagingSenderId: "315987088863"
+};
+
 
 @NgModule({
   declarations: [
@@ -40,7 +50,8 @@ export function highchartsFactory() {
     HttpModule,
     routing,
     MaterialModule.forRoot(),
-    ChartModule
+    ChartModule,
+    AngularFireModule.initializeApp(firebaseConfig)
   ],
   providers: [{
     provide: HighchartsStatic,
