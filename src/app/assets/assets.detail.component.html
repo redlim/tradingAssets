@@ -15,20 +15,41 @@
           <chart [options]="options"></chart>
         </div>
       </div>
-      <div class="comments">
-        <div class="box-comment" *ngFor="let comment of comments">
-          <div class="comment-date">
-            <small>{{comment.date | date:"MM/dd/yy"}}</small>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="comments">
+            <div class="box-comment" *ngFor="let comment of comments">
+              <div class="comment-date">
+                <small>{{comment.date | date:"MM/dd/yy"}}</small>
+              </div>
+              <div class="comment-content">
+                <p>{{comment.content}}</p>
+              </div>
+            </div>
           </div>
-          <div class="comment-content">
-            <p>{{comment.content}}</p>
+          <md-input-container>
+            <input md-input placeholder="Please Comment"  [(ngModel)]=comment>
+          </md-input-container>
+          <button md-raised-button (click)="addComment(comment,asset.id)">Add</button>
+        </div>
+        <div class="col-md-6">
+          <div class="comments">
+            <div class="box-comment" *ngFor="let comment of fireComments | async">
+              <div class="comment-date">
+                <small>{{comment.date | date:"MM/dd/yy"}}</small>
+              </div>
+              <div class="comment-content">
+                <p>{{comment.content}}</p>
+              </div>
+            </div>
           </div>
+          <md-input-container>
+            <input md-input placeholder="Please Comment"  [(ngModel)]=comment>
+          </md-input-container>
+          <button md-raised-button (click)="addComment(comment,asset.id)">Add</button>
         </div>
       </div>
-      <md-input-container>
-        <input md-input placeholder="Please Comment"  [(ngModel)]=comment>
-      </md-input-container>
-      <button md-raised-button (click)="addComment(comment,asset.id)">Add</button>
+
     </md-card-content>
     <md-card-actions>
       <button (click)="editAsset(asset.id)" color="primary" md-fab><md-icon>edit</md-icon></button>
