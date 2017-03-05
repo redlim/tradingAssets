@@ -12,6 +12,9 @@ import {HeaderComponent} from './header/header.component'
 import {AssetsComponent} from './assets/assets.component'
 import {AssetsEditComponent} from './assets/assets.edit.component'
 import {AssetDetailComponent} from './assets/assets.detail.component'
+import {DataTable} from './components/table/datatable.component'
+import {ColumnComponent} from './components/table/column.component'
+
 import {routing} from "./app.routing";
 import { MaterialModule } from '@angular/material';
 
@@ -26,7 +29,9 @@ export function highchartsFactory() {
     AssetDetailComponent,
     AssetsComponent,
     AssetsEditComponent,
-    HeaderComponent
+    HeaderComponent,
+    DataTable,
+    ColumnComponent
   ],
   imports: [
     BrowserModule,

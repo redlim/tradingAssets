@@ -13,13 +13,15 @@ export class AssetsComponent {
 
   public constructor(private http : Http,private assetsService:AssetsService, private router:Router){}
 
-  title = "Los Libracos";
-  assets=[];
+  assets;
+  filteredList;
+  risk="";
+  currency ="";
+  enableFilter = true;
   ngOnInit() { this.getAssets(); }
 
   getAssets(){
     this.assetsService.getAssets().subscribe((items)=>this.assets = items);
-    console.log(this.assets);
   }
   detailsAsset(asset){
     this.router.navigate(['asset/'+asset.id]);
@@ -36,6 +38,30 @@ export class AssetsComponent {
 
     }
   }
-
+  getData(){
+    if(this.risk !== "" || this.currency !== ""){
+      return this.filteredList;
+    }else{
+      return this.assets;
+    }
+  }
+  filterCurrency(){
+    this.filteredList = this.assets.filter(function(el){
+      var result="";
+      for(var key in el){
+        result+= el[key];
+      }
+      return result.toLowerCase().indexOf(this.currency.toLowerCase()) > -1;
+    }.bind(this));
+  }
+  filterRisk(){
+    this.filteredList = this.assets.filter(function(el){
+      var result="";
+      for(var key in el){
+        result+= el[key];
+      }
+      return result.toLowerCase().indexOf(this.risk.toLowerCase()) > -1;
+    }.bind(this));
+  }
 
 }
