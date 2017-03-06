@@ -29,15 +29,6 @@ export class AssetsComponent {
   newAsset(){
     this.router.navigate(['/edit/asset/new']);
   }
-  editAsset(asset){
-    this.router.navigate(['/edit/asset/'+asset.id])
-  }
-  deleteAsset(asset){
-    if (confirm('Estás seguro')) {
-      this.assetsService.deleteItem(asset).subscribe((response)=>this.getAssets());
-
-    }
-  }
   getData(){
     if(this.risk !== "" || this.currency !== ""){
       return this.filteredList;
