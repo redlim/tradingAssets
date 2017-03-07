@@ -18,10 +18,9 @@
             <box-component [icon]="'info'" [boxtitle]="'Issuer'" [value]=asset?.issuer.name [color]="'#dd4b39'" [size]="'6'"></box-component>
             <box-component [icon]="'info'" [boxtitle]="'Risk Family'" [value]=formatRiskData(asset?.risk_family) [color]="'#dd4b39'" [size]="'6'"></box-component>
           </div>
-
         </div>
         <div class="col-md-6">
-          <chart [options]="options"></chart>
+          <chart class="chartContainer" [options]="options"></chart>
         </div>
       </div>
       <div class="row" *ngIf="activeCommentsLocalStorage">
@@ -63,7 +62,7 @@
       </div>
     </md-card-content>
     <md-card-actions>
-      <button (click)="gotoAssets()" md-fab><md-icon>home</md-icon></button>
+      <button class="pull-right" (click)="gotoAssets()" md-fab><md-icon>home</md-icon></button>
     </md-card-actions>
   </md-card>
 </div>
