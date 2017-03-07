@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {Router } from '@angular/router'
+
 @Component({
   selector: 'books-header',
   templateUrl:'header.component.html',
@@ -6,6 +8,11 @@ import { Component } from '@angular/core';
 })
 
 export class HeaderComponent {
+  constructor(private router: Router){};
+  title="Trading Assets";
+  subtitle =  "The Master App for your Business";
 
-  title="Trading Assets"
+  gotoAssets() {
+    this.router.navigate(['/assets']);
+  }
 }

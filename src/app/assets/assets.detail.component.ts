@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router'
 import {AssetsService} from './services/assets.service'
-import {AngularFire, FirebaseListObservable,FirebaseObjectObservable} from 'angularfire2';
+import {AngularFire, FirebaseListObservable} from 'angularfire2';
+import {AssetsComponent} from './assets.component'
 
 const highcharts = require('highcharts');
 
@@ -36,25 +37,30 @@ export class AssetDetailComponent {
           this.generateChart(asset.prices,asset.name,asset.currency.name);
           this.loadComments(asset.id);
           this.fireComments = af.database.list("comments"+id);
-          console.log(this.fireComments)
         });
 
   }
+
   loadComments(id){
     this.comments = JSON.parse(localStorage.getItem("assetComments"+id));
   }
+
   addComment(comment,id){
 
+    // using Firebase
     const itemObservable = this.af.database.list('comments'+id);
     let date = new Date();
     itemObservable.push({content:comment,date:date.toISOString()});
 
+    // Using LocalStorage
     let comments = JSON.parse(localStorage.getItem("assetComments"+id)) || [];
     comments.push({content:comment,date:new Date()});
     localStorage.setItem("assetComments"+id,JSON.stringify(comments));
     this.comments = comments;
     this.comment = "";
   }
+
+
   formatRiskData(data){
     if(data){
       let i = 1;
@@ -67,6 +73,8 @@ export class AssetDetailComponent {
       return name;
     }
   }
+
+
   formatData(data){
     if(data){
       let i = 2;
@@ -150,20 +158,13 @@ export class AssetDetailComponent {
         data: result
       }]
     };
-
   }
+
   gotoAssets() {
     this.router.navigate(['/assets']);
   }
-  editAsset(id){
-    this.router.navigate(['/edit/asset/'+id]);
-  }
-  deleteAsset(asset){
-    if (confirm('Estás seguro')) {
-      this.assetsService.deleteItem(asset).subscribe((response)=>this.gotoAssets());
-    }
-  }
 }
+
 
 highcharts.createElement('link', {
   href: 'https://fonts.googleapis.com/css?family=Unica+One',
