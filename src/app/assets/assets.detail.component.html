@@ -48,6 +48,8 @@
               <md-icon md-list-avatar>note</md-icon>
               <p md-line> {{comment.date | date:"MM/dd/yy HH:mm"}} </p>
               <h4 md-line>{{comment.content}} </h4>
+              <button md-raised-button class="btn-info" (click)="openEditCommentForm(comment.$key,comment.content)">Update</button>
+              <button md-raised-button class="btn-danger" (click)="deleteComment(comment.$key)">Delete</button>
             </md-list-item>
           </md-list>
         </div>
@@ -56,7 +58,10 @@
             <md-input-container class="input-container">
               <textarea md-input minRows="4"  placeholder="Please Comment"  [(ngModel)]=comment></textarea>
             </md-input-container>
-            <button class="pull-right" md-raised-button (click)="addComment(comment,asset.id)">Add</button>
+            <button *ngIf="!editCommentForm" md-raised-button (click)="addComment(comment,asset.id)">Add</button>
+            <button *ngIf="editCommentForm" md-raised-button  class="btn-info" (click)="editComment(comment)">Update</button>
+            <button *ngIf="editCommentForm" md-raised-button  class="btn-warning" (click)="cancelEditComment()">Cancel</button>
+            <button class="pull-right btn-danger"  md-raised-button (click)="deleteAllComments()">Delete All</button>
           </div>
         </div>
       </div>

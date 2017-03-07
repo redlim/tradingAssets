@@ -10,3 +10,6 @@
   margin: 0 auto;
   display: block;
 }
+.invisible{
+  display: none;
+}
