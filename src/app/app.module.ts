@@ -42,7 +42,7 @@ export const   firebaseConfig = {
     HeaderComponent,
     DataTable,
     ColumnComponent,
-    BoxComponent
+    BoxComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,7 +51,7 @@ export const   firebaseConfig = {
     routing,
     MaterialModule.forRoot(),
     ChartModule,
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig),
   ],
   providers: [{
     provide: HighchartsStatic,
@@ -59,4 +59,5 @@ export const   firebaseConfig = {
   },AssetsService],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
