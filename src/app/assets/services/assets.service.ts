@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core'
-import { Http, Response,Headers } from '@angular/http'
+import { Http, Headers } from '@angular/http'
 import 'rxjs/Rx';
 
 @Injectable()
 export class AssetsService{
 
   constructor(private http:Http){}
+
   createAuthorizationHeader(headers: Headers) {
     headers.append('JsonStub-User-Key', '9facef2e-9583-4a83-9f08-c87159f1c113');
     headers.append('JsonStub-Project-Key', '6ed070c1-b334-4612-8fa8-169c5e45baef');
@@ -20,6 +21,7 @@ export class AssetsService{
     });
   }
 
+  // No use for the moment
   post(url, data) {
     let headers = new Headers();
     this.createAuthorizationHeader(headers);
@@ -27,6 +29,7 @@ export class AssetsService{
       headers: headers
     });
   }
+
   private url = "http://jsonstub.com/etsfintech/symbols";
 
   getAssets(){
@@ -37,22 +40,6 @@ export class AssetsService{
   getAsset(id){
     return this.get(this.url+"/"+id).map(
       response => response.json()
-    )
-  }
-
-  setAsset(data){
-    return this.post(this.url,data).map(
-      response => response
-    )
-  }
-  modifyAsset(item){
-    return this.http.put(this.url+item.id,item).map(
-      response => response
-    )
-  }
-  deleteItem(item){
-    return this.http.delete(this.url+item.id).map(
-      response => response
     )
   }
 

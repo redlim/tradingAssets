@@ -1,19 +1,36 @@
 <div class="app-content">
-  <md-card  *ngFor="let asset of assets" class="example-card">
-    <md-card-header>
-      <div md-card-avatar class="example-header-image"></div>
-      <md-card-title>{{asset.name}}</md-card-title>
-    </md-card-header>
+  <md-card class="example-card">
     <md-card-content>
-      <p>
-        {{asset.currency}},{{asset.risk_family}}
-      </p>
+      <table class="table table-responsive">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Currency</th>
+          <th>Risk Family</th>
+          <th>Info</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td></td>
+          <td><input type="text" class="form-control" *ngIf=enableFilter [(ngModel)]=currency
+                      (keyup)=filterCurrency() placeholder="Filter" /></td>
+          <td><input type="text" class="form-control" *ngIf=enableFilter [(ngModel)]=risk
+                 (keyup)=filterRisk() placeholder="Filter"/></td>
+          <td></td>
+        </tr>
+        <tr *ngFor="let asset of getData(); let i = index; let f = first; let l = last">
+          <td>{{asset.name}}</td>
+          <td>{{asset.currency}}</td>
+          <td>{{asset.risk_family}}</td>
+          <div class="example-tooltip-host" mdTooltip="More Info" [mdTooltipPosition]="'above'">
+            <button (click)="detailsAsset(asset,i,f,l)" class="btn btn-block btn-info"><md-icon>info_outline</md-icon></button>
+          </div>
+        </tr>
+        </tbody>
+      </table>
     </md-card-content>
     <md-card-actions>
-      <button (click)="detailsAsset(asset)" color="primary" md-fab><md-icon>edit</md-icon></button>
-      <button (click)="deleteAsset(asset)" color="warn" md-fab><md-icon>deletes</md-icon></button>
-      <button (click)="gotoAssets()" md-fab><md-icon>home</md-icon></button>
     </md-card-actions>
   </md-card>
-  <button (click)="newAsset()" md-fab class="md-button-ripple-round"><md-icon>note_add</md-icon></button>
 </div>

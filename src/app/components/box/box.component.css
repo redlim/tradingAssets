@@ -1,0 +1,44 @@
+.red{
+  background-color: red;
+}
+.box-container {
+  background-color: transparent;
+}
+.box-content{
+  padding: 2px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+.box-icon{
+  z-index: 0;
+  color: rgba(0,0,0,0.15);
+  display: none;
+}
+.box-icon .material-icons{
+  font-size: 64px;
+  position: absolute;
+  top: -5px;
+  right: 49px;
+}
+.box-footer{
+  position: relative;
+  text-align: center;
+  padding: 3px 0;
+  color: #fff;
+  color: rgba(255,255,255,0.8);
+  display: block;
+  z-index: 10;
+  background: rgba(0,0,0,0.1);
+  text-decoration: none;
+}
+.box-value{
+  text-align: center;
+  padding: 20px;
+}
+.box-value p{
+  font-size: 18px;
+  color: #FFFFFF;
+  margin :0;
+}
+.box-footer p{
+  margin:0;
+}

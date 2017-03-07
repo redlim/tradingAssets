@@ -1,7 +1,12 @@
 <md-toolbar color="primary">
-  <span>{{title}}</span>
+  <h1>{{title}}</h1>
+  <md-toolbar-row>
+    <span class="example-spacer">{{subtitle}}</span>
+    <div class="example-tooltip-host" mdTooltip="Home" [mdTooltipPosition]="'above'">
+      <button class="pull-right" (click)="gotoAssets()" md-fab><md-icon>home</md-icon></button>
+    </div>
+  </md-toolbar-row>
   <md-toolbar-row>
     <span class="example-spacer"></span>
-    <md-icon class="example-icon">info</md-icon>
   </md-toolbar-row>
 </md-toolbar>
