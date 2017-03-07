@@ -11,11 +11,12 @@ export interface Asset {
 
 @Component({
   selector: 'asset-detail',
-  templateUrl: './assets.detail.component.html'
+  templateUrl: './assets.detail.component.html',
+  styleUrls: ['./assets.detail.component.css']
 })
 
 export class AssetDetailComponent {
-
+  activeCommentsLocalStorage:Boolean = false;
   asset:Asset;
   options:Object;
   comments:Object;

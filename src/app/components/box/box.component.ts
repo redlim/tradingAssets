@@ -10,6 +10,7 @@ export class BoxComponent {
     @Input() size;
     @Input() value;
     @Input() color;
+    @Input() boxtitle;
 
     getClass(){
         return 'col-md-'+this.size

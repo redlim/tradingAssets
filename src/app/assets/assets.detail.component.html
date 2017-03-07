@@ -1,21 +1,30 @@
-<div class="app-content">
+<div class="app-content container-fluid">
   <md-card class="example-card">
     <md-card-content>
       <div class="row">
         <div class="col-md-6">
-          <box-component [icon]="'info'" [value]=asset?.name [color]="'blue'" [size]="'3'"></box-component>
-          <box-component [icon]="'info'" [value]=asset?.isin [color]="'red'" [size]="'3'"></box-component>
-          <box-component [icon]="'info'" [value]=asset?.symbol_type [color]="'yellow'" [size]="'3'"></box-component>
-          <box-component [icon]="'info'" [value]=formatData(asset?.region)  [color]="'red'" [size]="'3'"></box-component>
-          <box-component [icon]="'info'" [value]=formatData(asset?.sector) [color]="'red'" [size]="'3'"></box-component>
-          <box-component [icon]="'info'" [value]=formatRiskData(asset?.risk_family) [color]="'red'" [size]="'3'"></box-component>
-          <box-component [icon]="'info'" [value]=asset?.issuer.name [color]="'red'" [size]="'3'"></box-component>
+          <div class="row">
+            <box-component [icon]="'info'" [boxtitle]="''" [value]=asset?.name [color]="'#00a65a'" [size]="'12'"></box-component>
+          </div>
+          <div class="row">
+            <box-component [icon]="'info'" [boxtitle]="'Isin'" [value]=asset?.isin [color]="'#00c0ef'" [size]="'6'"></box-component>
+            <box-component [icon]="'info'" [boxtitle]="'Region'" [value]=formatData(asset?.region)  [color]="'#dd4b39'" [size]="'6'"></box-component>
+          </div>
+          <div class="row">
+            <box-component [icon]="'info'" [boxtitle]="'Symbol Type'" [value]=asset?.symbol_type [color]="'#f39c12'" [size]="'6'"></box-component>
+            <box-component [icon]="'info'" [boxtitle]="'Sector'" [value]=formatData(asset?.sector) [color]="'#337ab7'" [size]="'6'"></box-component>
+          </div>
+          <div class="row">
+            <box-component [icon]="'info'" [boxtitle]="'Issuer'" [value]=asset?.issuer.name [color]="'#dd4b39'" [size]="'6'"></box-component>
+            <box-component [icon]="'info'" [boxtitle]="'Risk Family'" [value]=formatRiskData(asset?.risk_family) [color]="'#dd4b39'" [size]="'6'"></box-component>
+          </div>
+
         </div>
         <div class="col-md-6">
           <chart [options]="options"></chart>
         </div>
       </div>
-      <div class="row">
+      <div class="row" *ngIf="activeCommentsLocalStorage">
         <div class="col-md-6">
           <div class="comments">
             <div class="box-comment" *ngFor="let comment of comments">
@@ -27,33 +36,33 @@
               </div>
             </div>
           </div>
-          <md-input-container>
-            <input md-input placeholder="Please Comment"  [(ngModel)]=comment>
-          </md-input-container>
-          <button md-raised-button (click)="addComment(comment,asset.id)">Add</button>
-        </div>
-        <div class="col-md-6">
-          <div class="comments">
-            <div class="box-comment" *ngFor="let comment of fireComments | async">
-              <div class="comment-date">
-                <small>{{comment.date | date:"MM/dd/yy"}}</small>
-              </div>
-              <div class="comment-content">
-                <p>{{comment.content}}</p>
-              </div>
-            </div>
-          </div>
-          <md-input-container>
-            <input md-input placeholder="Please Comment"  [(ngModel)]=comment>
-          </md-input-container>
-          <button md-raised-button (click)="addComment(comment,asset.id)">Add</button>
         </div>
       </div>
-
+      <div class="container comments-container">
+        <div class="col-md-12">
+          <div class="header text-center">
+            <h1>Comments</h1>
+          </div>
+          <md-list>
+            <md-divider></md-divider>
+            <md-list-item *ngFor="let comment of fireComments | async">
+              <md-icon md-list-avatar>note</md-icon>
+              <p md-line> {{comment.date | date:"MM/dd/yy HH:mm"}} </p>
+              <h4 md-line>{{comment.content}} </h4>
+            </md-list-item>
+          </md-list>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <md-input-container class="input-container">
+              <textarea md-input minRows="4"  placeholder="Please Comment"  [(ngModel)]=comment></textarea>
+            </md-input-container>
+            <button class="pull-right" md-raised-button (click)="addComment(comment,asset.id)">Add</button>
+          </div>
+        </div>
+      </div>
     </md-card-content>
     <md-card-actions>
-      <button (click)="editAsset(asset.id)" color="primary" md-fab><md-icon>edit</md-icon></button>
-      <button (click)="deleteAsset(asset)" color="warn" md-fab><md-icon>delete</md-icon></button>
       <button (click)="gotoAssets()" md-fab><md-icon>home</md-icon></button>
     </md-card-actions>
   </md-card>

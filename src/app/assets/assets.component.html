@@ -24,11 +24,11 @@
                  (keyup)=filterRisk() placeholder="Filter"/></td>
           <td></td>
         </tr>
-        <tr *ngFor="let asset of getData()">
+        <tr *ngFor="let asset of getData(); let i = index; let f = first; let l = last">
           <td>{{asset.name}}</td>
           <td>{{asset.currency}}</td>
           <td>{{asset.risk_family}}</td>
-          <button (click)="detailsAsset(asset)" class="btn btn-block btn-info"><md-icon>info_outline</md-icon></button>
+          <button (click)="detailsAsset(asset,i,f,l)" class="btn btn-block btn-info"><md-icon>info_outline</md-icon></button>
         </tr>
         </tbody>
       </table>
