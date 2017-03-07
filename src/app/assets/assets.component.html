@@ -23,7 +23,9 @@
           <td>{{asset.name}}</td>
           <td>{{asset.currency}}</td>
           <td>{{asset.risk_family}}</td>
-          <button (click)="detailsAsset(asset,i,f,l)" class="btn btn-block btn-info"><md-icon>info_outline</md-icon></button>
+          <div class="example-tooltip-host" mdTooltip="More Info" [mdTooltipPosition]="'above'">
+            <button (click)="detailsAsset(asset,i,f,l)" class="btn btn-block btn-info"><md-icon>info_outline</md-icon></button>
+          </div>
         </tr>
         </tbody>
       </table>

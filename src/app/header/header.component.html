@@ -2,7 +2,9 @@
   <h1>{{title}}</h1>
   <md-toolbar-row>
     <span class="example-spacer">{{subtitle}}</span>
-    <button class="pull-right" (click)="gotoAssets()" md-fab><md-icon>home</md-icon></button>
+    <div class="example-tooltip-host" mdTooltip="Home" [mdTooltipPosition]="'above'">
+      <button class="pull-right" (click)="gotoAssets()" md-fab><md-icon>home</md-icon></button>
+    </div>
   </md-toolbar-row>
   <md-toolbar-row>
     <span class="example-spacer"></span>
