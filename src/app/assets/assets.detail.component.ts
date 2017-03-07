@@ -21,6 +21,8 @@ export interface Asset {
 })
 
 export class AssetDetailComponent {
+  actualCommentId= "";
+  editCommentForm = false;
   activeCommentsLocalStorage:Boolean = false;
   asset:Asset;
   options:Object;
@@ -46,20 +48,32 @@ export class AssetDetailComponent {
   }
 
   addComment(comment,id){
-
-    // using Firebase
-    const itemObservable = this.af.database.list('comments'+id);
     let date = new Date();
-    itemObservable.push({content:comment,date:date.toISOString()});
-
-    // Using LocalStorage
-    let comments = JSON.parse(localStorage.getItem("assetComments"+id)) || [];
-    comments.push({content:comment,date:new Date()});
-    localStorage.setItem("assetComments"+id,JSON.stringify(comments));
-    this.comments = comments;
+    this.fireComments.push({content:comment,date:date.toISOString()});
+  }
+  openEditCommentForm(id,comment){
+    this.actualCommentId = id;
+    this.editCommentForm = true;
+    this.comment = comment;
+  }
+  editComment(comment){
+    let date = new Date();
+    this.fireComments.update(this.actualCommentId,{content:comment,date:date.toISOString()});
+    this.editCommentForm = false;
     this.comment = "";
   }
+  deleteComment(id) {
+    this.fireComments.remove(id);
+  }
 
+  deleteAllComments(){
+    this.fireComments.remove();
+  }
+
+  cancelEditComment(){
+    this.editCommentForm = false;
+    this.comment = "";
+  }
 
   formatRiskData(data){
     if(data){
